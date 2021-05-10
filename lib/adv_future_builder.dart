@@ -13,7 +13,7 @@ class AdvFutureBuilder<T> extends StatelessWidget {
 		Key key,
 		this.future,
 		this.initialData,
-		this.onWait, //TODO se null?
+		this.onWait,
 		this.onError, //TODO se null?
 		this.onData, //TODO se null?
 	}) : super(key: key);
@@ -30,7 +30,7 @@ class AdvFutureBuilder<T> extends StatelessWidget {
 				//waiting case
 				case ConnectionState.waiting:
 				case ConnectionState.active:
-					return onWait(context);
+					return onWait==null ? Container() : onWait(context);
 				//done case, running onError or onData depending on future status
 				case ConnectionState.done:
 					return snapshot.hasError? onError(context, snapshot.error) : onData(context, snapshot.data);
