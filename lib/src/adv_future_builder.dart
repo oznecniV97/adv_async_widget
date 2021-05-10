@@ -1,3 +1,4 @@
+import 'package:adv_async_widget/src/utils.dart';
 import 'package:flutter/material.dart';
 
 class AdvFutureBuilder<T> extends StatelessWidget {
@@ -11,12 +12,12 @@ class AdvFutureBuilder<T> extends StatelessWidget {
 
 	const AdvFutureBuilder({
 		Key key,
+		@required this.onData,
 		this.future,
 		this.initialData,
 		this.onWait,
-		this.onError, //TODO se null?
-		this.onData, //TODO se null?
-	}) : super(key: key);
+		this.onError,
+	}) : assert(onData!=null), super(key: key);
 
 	@override
 	Widget build(BuildContext context) => FutureBuilder<T>(
@@ -30,10 +31,10 @@ class AdvFutureBuilder<T> extends StatelessWidget {
 				//waiting case
 				case ConnectionState.waiting:
 				case ConnectionState.active:
-					return onWait==null ? Container() : onWait(context);
+					return optionalWidgetPrint(onWait==null, () => onWait(context));
 				//done case, running onError or onData depending on future status
 				case ConnectionState.done:
-					return snapshot.hasError? onError(context, snapshot.error) : onData(context, snapshot.data);
+					return snapshot.hasError? optionalWidgetPrint(onError==null, () => onError(context, snapshot.error)) : onData(context, snapshot.data);
 			}
 			//impossible return, only for warning suppression
 			return null;
