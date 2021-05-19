@@ -1,7 +1,6 @@
 name: adv_async_widget
 description: Utility widgets for standard future and stream uses
 version: 0.0.1
-author: oznecniV97
 homepage: https://github.com/oznecniV97/adv_async_widget
 
 environment:

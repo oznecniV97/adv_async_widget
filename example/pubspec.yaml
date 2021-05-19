@@ -2,7 +2,6 @@ name: adv_async_widget_example
 description: Example project for adv_async_widget
 publish_to: 'none'
 version: 1.0.0+1
-author: oznecniV97
 homepage: https://github.com/oznecniV97/adv_async_widget
 
 environment:
