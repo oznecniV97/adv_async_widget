@@ -3,18 +3,23 @@ import 'package:flutter/material.dart';
 
 class AdvFutureBuilder<T> extends StatelessWidget {
 
+	///See [FutureBuilder.future] for information
 	final Future<T> future;
+	///See [FutureBuilder.initialData] for information
 	final T initialData;
 
-	final Widget Function(BuildContext context) onWait;
-	final Widget Function(BuildContext context, Object error) onError;
+	///Callback invoked when [future] is not null and it's finished ([ConnectionState.done]), passing data object, or if [future] is null, with data null
 	final Widget Function(BuildContext context, T data) onData;
+	///Callback invoked when [future] is not null, before it will finish
+	final Widget Function(BuildContext context) onWait;
+	///Callback invoked if [future] is not null and it ends in error
+	final Widget Function(BuildContext context, Object error) onError;
 
 	const AdvFutureBuilder({
 		Key key,
-		@required this.onData,
 		this.future,
 		this.initialData,
+		@required this.onData,
 		this.onWait,
 		this.onError,
 	}) : assert(onData!=null), super(key: key);
