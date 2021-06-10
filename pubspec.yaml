@@ -1,6 +1,6 @@
 name: adv_async_widget
-description: Utility widgets for standard future and stream uses
-version: 0.0.1
+description: Are you tired of always writing the same future and stream builders? Use AdvAsyncWidget to write only the code that you need for!
+version: 0.0.2
 homepage: https://github.com/oznecniV97/adv_async_widget
 
 environment:
