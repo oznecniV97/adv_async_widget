@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
 
-  Future<String> exampleFuture;
+  late final Future<String> exampleFuture;
 
   @override
   void initState() {
@@ -32,7 +32,7 @@ class MyAppState extends State<MyApp> {
       body: AdvFutureBuilder<String>(
         future: exampleFuture,
         onWait: (context) => CircularProgressIndicator(),
-        onData: (context, data) => Text(data),
+        onData: (context, data) => Text(data!),
       ),
     ),
   );
