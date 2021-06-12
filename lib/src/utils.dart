@@ -1,30 +1,38 @@
 import 'package:flutter/widgets.dart';
 
-Widget optionalWidgetPrint(bool print, Widget Function() widget) =>
-    print ? widget() : Container();
-
 AsyncWidgetBuilder<T> advAsyncBuilder<T>(
-  final Widget Function(BuildContext context, T data) onData,
-  final Widget Function(BuildContext context) onWait,
-  final Widget Function(BuildContext context, Object error) onError,
-) {
-  return (context, snapshot) {
-    switch (snapshot.connectionState) {
-      //future null case
-      case ConnectionState.none:
-        return onData(context, null);
-      //waiting case
-      case ConnectionState.waiting:
-      case ConnectionState.active:
-        return optionalWidgetPrint(onWait != null, () => onWait(context));
-      //done case, running onError or onData depending on future status
-      case ConnectionState.done:
-        return snapshot.hasError
-            ? optionalWidgetPrint(
-                onError != null, () => onError(context, snapshot.error))
-            : onData(context, snapshot.data);
-    }
-    //impossible return, only for warning suppression
-    return null;
-  };
-}
+  final Widget Function(BuildContext context, T? data) onData,
+  final Widget Function(BuildContext context)? onWait,
+  final Widget Function(BuildContext context, Object? error)? onError,
+) =>
+    (context, snapshot) {
+      Widget? _return;
+      switch (snapshot.connectionState) {
+        //future null case
+        case ConnectionState.none:
+          _return = onData(context, null);
+          break;
+        //waiting case
+        case ConnectionState.waiting:
+        case ConnectionState.active:
+          if (onWait != null) {
+            _return = onWait(context);
+          }
+          break;
+        //done case, running onError or onData depending on future status
+        case ConnectionState.done:
+          if (snapshot.hasError) {
+            if (onError != null) {
+              _return = onError(context, snapshot.error);
+            }
+          } else {
+            _return = onData(context, snapshot.data);
+          }
+          break;
+      }
+
+      //default case, if no one return set was invoked
+      _return ??= Container();
+
+      return _return;
+    };

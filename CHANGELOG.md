@@ -1,3 +1,7 @@
+## [0.1.0] - 2021/06/12
+
+* Package migration to null safety
+
 ## [0.0.2] - 2021/06/11
 
 * Moved duplicate code inside utils.dart

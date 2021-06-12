@@ -6,7 +6,7 @@ import 'package:adv_async_widget/adv_async_widget.dart';
 void main() {
   testWidgets('AdvFutureBuilder without future show onData with data null', (WidgetTester tester) async {
     // Create the widget
-    await materialAppTest(tester, AdvFutureBuilder(
+    await materialAppTest(tester, AdvFutureBuilder<Null>(
         onData: (context, data) => Text(getDataText(data))
     ));
 
@@ -29,6 +29,6 @@ void main() {
 
 String getDataText(data) => "data:$data";
 
-Future<void> materialAppTest(tester, widget) => tester.pumpWidget(MaterialApp(
+Future<void>? materialAppTest(tester, widget) => tester.pumpWidget(MaterialApp(
   home: widget,
 ));
