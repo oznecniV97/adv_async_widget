@@ -2,13 +2,86 @@
 
 Utility widgets for standard future and stream uses
 
-## Getting Started
+## New advanced async builders
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+This package contains 2 utility classes:
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+- [AdvFutureBuilder](#advfuturebuilder)
+- [AdvStreamBuilder](#advstreambuilder)
+
+### AdvFutureBuilder
+
+This class replace the standard `FutureBuilder` allowing you to have multiple build methods based on the connectionState.
+
+Usage example:
+
+- case with standard `FutureBuilder`
+
+```dart
+FutureBuilder<String>(
+    future: exampleFuture,
+    //old standard builder with one method for everything
+    builder: (context, snapshot) {
+      if(snapshot.connectionState == ConnectionState.waiting) {
+        return CircularProgressIndicator();
+      }
+      if(snapshot.hasError) {
+        return Text("Error: ${snapshot.error}");
+      }
+      return Text(snapshot.data ?? "No data");
+    }
+)
+```
+
+- case with `AdvFutureBuilder`
+
+```dart
+AdvFutureBuilder<String>(
+    future: exampleFuture,
+    //three different methods, one for each case
+    onWait: (context) => CircularProgressIndicator(),
+    onError: (context, error) => Text("Error: $error"),
+    onData: (context, data) => Text(data ?? "No data"),
+)
+```
+
+### AdvStreamBuilder
+
+This class replace the standard `StreamBuilder` allowing you to have multiple build methods based on the connectionState.
+(yeah, they're the same, but this one is for stream instead of future)
+
+Usage example:
+
+- case with standard `StreamBuilder`
+
+```dart
+StreamBuilder<String>(
+    stream: exampleStream,
+    //old standard builder with one method for everything
+    builder: (context, snapshot) {
+      if(snapshot.connectionState == ConnectionState.waiting) {
+        return CircularProgressIndicator();
+      }
+      if(snapshot.hasError) {
+        return Text("Error: ${snapshot.error}");
+      }
+      return Text(snapshot.data ?? "No data");
+    }
+)
+```
+
+- case with `AdvStreamBuilder`
+
+```dart
+AdvStreamBuilder<String>(
+    stream: exampleStream,
+    //three different methods, one for each case
+    onWait: (context) => CircularProgressIndicator(),
+    onError: (context, error) => Text("Error: $error"),
+    onData: (context, data) => Text(data ?? "No data"),
+)
+```
+
+## Full example
+
+You can find a full flutter example on [pub example tab](https://pub.dev/packages/adv_async_widget/example) or inside [GitHub example](https://github.com/oznecniV97/adv_async_widget/blob/master/example/lib/main.dart)
