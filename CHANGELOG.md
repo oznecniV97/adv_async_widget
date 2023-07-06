@@ -1,3 +1,8 @@
+## [0.2.0] - 2023/06/06
+
+* Add real README file
+* Add onActive function for AdvStreamBuilder
+
 ## [0.1.0] - 2021/06/12
 
 * Package migration to null safety
