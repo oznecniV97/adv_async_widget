@@ -1,6 +1,12 @@
 # adv_async_widget
 
-Utility widgets for standard future and stream uses
+![GitHub](https://img.shields.io/github/license/oznecniV97/adv_async_widget)
+![Pub Version](https://img.shields.io/pub/v/adv_async_widget)
+![likes](https://img.shields.io/pub/likes/adv_async_widget)
+![Pub Points](https://img.shields.io/pub/points/adv_async_widget)
+![Pub Popularity](https://img.shields.io/pub/popularity/adv_async_widget)
+
+Utility widgets for standard future and stream uses.
 
 ## New advanced async builders
 
