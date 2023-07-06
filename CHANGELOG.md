@@ -2,6 +2,7 @@
 
 * Add real README file
 * Add onActive function for AdvStreamBuilder
+* Add GitHub workflow
 
 ## [0.1.0] - 2021/06/12
 
