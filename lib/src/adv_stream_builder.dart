@@ -8,8 +8,11 @@ class AdvStreamBuilder<T> extends StatelessWidget {
   ///See [StreamBuilder.initialData] for information
   final T? initialData;
 
-  ///Callback invoked when [stream] is not null and it's finished ([ConnectionState.done]), passing data object, or if [stream] is null, passing data null
-  final Widget Function(BuildContext context, T? data) onData;
+  ///Callback invoked when [stream] is finished ([ConnectionState.done]), passing data object or, if [stream] is null, passing data null
+  final Widget Function(BuildContext context, T? data) onDone;
+
+  ///Callback invoked when [stream] is active for every data received ([ConnectionState.active]), passing data object or, if [stream] is null, passing data null
+  final Widget Function(BuildContext context, T? data)? onActive;
 
   ///Callback invoked when [stream] is not null, before it will finish
   final Widget Function(BuildContext context)? onWait;
@@ -21,7 +24,8 @@ class AdvStreamBuilder<T> extends StatelessWidget {
     Key? key,
     this.stream,
     this.initialData,
-    required this.onData,
+    required this.onDone,
+    this.onActive,
     this.onWait,
     this.onError,
   }) : super(key: key);
@@ -30,6 +34,6 @@ class AdvStreamBuilder<T> extends StatelessWidget {
   Widget build(BuildContext context) => StreamBuilder<T>(
         stream: stream,
         initialData: initialData,
-        builder: advAsyncBuilder(onData, onWait, onError),
+        builder: advAsyncBuilder(onDone, onWait, onError, onActive),
       );
 }
